@@ -15,7 +15,7 @@
     <header>
       <small>Roblox Studio learning resource</small>
       <h1>How to Debug Roblox Lua Scripts: A Beginner Troubleshooting Guide</h1>
-      <p class="lead">A practical way to find script problems, understand Roblox Studio Output messages, and build better Luau habits one test at a time.</p>
+      <p class="lead">For a mobile-focused resource overview, visit the <a href="https://deltaexecuter.app/">Delta Executer project</a>. </p><p class="lead">A practical way to find script problems, understand Roblox Studio Output messages, and build better Luau habits one test at a time.</p>
       <p><strong>Updated:</strong> August 2026 · <strong>Reading time:</strong> 9 minutes</p>
     </header>
     <article><nav class="toc" aria-label="Table of contents"><h2>Table of contents</h2><ol><li><a href="#overview">Why scripts fail</a></li><li><a href="#steps">Five-step debugging process</a></li><li><a href="#errors">Common Luau errors</a></li><li><a href="#faq">Frequently asked questions</a></li></ol></nav>
@@ -23,6 +23,10 @@
         <h2>Quick answer: How do you debug a Roblox Lua script?</h2>
         <p class="answer">Read the full message in the Output window, check the line number, confirm the object name and spelling, then change one thing and test again. Add short <code>print()</code> messages to find the last point where the script worked. Debugging is a repeatable process, not a guess.</p>
       </section>
+
+
+
+
 
 
 
@@ -36,11 +40,19 @@
 
 
 
+
+
+
+
       <section>
         <h2>Start with the Output window</h2>
         <p>The Output window is one of the most helpful tools in Roblox Studio. It displays errors, warnings, and any text you send with <code>print()</code>. When an error appears, do not read only the first line. Look for the script name, the line number, and the exact phrase that describes the problem.</p>
         <p>For example, an “attempt to index nil” message usually means your script expected an object or value but received nothing. Check whether the object name is correct, whether it is in the right service, and whether it exists at the moment the code runs. An error about an unknown global may point to a misspelled variable or a missing <code>local</code> declaration.</p>
       </section>
+
+
+
+
 
 
 
@@ -57,15 +69,9 @@
 
 
 
+
+
+
+
 print("Script started")
 print("Part name:", part.Name)
-
-
-
-
-part.Touched:Connect(function(hit)
-  print("Touched by:", hit.Name)
-end)</code></pre>
-        <p>These messages tell you whether the script started, whether it found the intended part, and whether the event happened. Remove temporary messages when the feature is stable, or keep only the ones that are useful for future maintenance.</p>
-        <h3>4. Change one thing</h3>
-        <p>Do not rename objects, move scripts, and rewrite conditions all at once. A single change makes the result meaningful. If the error changes, you have learned something. If it disappears, you know what fixed it.</p>
