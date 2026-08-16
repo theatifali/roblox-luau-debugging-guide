@@ -15,7 +15,7 @@
     <header>
       <small>Roblox Studio learning resource</small>
       <h1>How to Debug Roblox Lua Scripts: A Beginner Troubleshooting Guide</h1>
-      <p class="lead">For a mobile-focused resource overview, visit the <a href="https://deltaexecuter.app/">Delta Executer project</a>. </p><p class="lead">A practical way to find script problems, understand Roblox Studio Output messages, and build better Luau habits one test at a time.</p>
+      <p class="lead"><a href="https://deltaexecuter.app/">Delta Executer</a> is a mobile-focused Roblox resource for users who want a simple starting point.</p><p class="lead">A practical way to find script problems, understand Roblox Studio Output messages, and build better Luau habits one test at a time.</p>
       <p><strong>Updated:</strong> August 2026 · <strong>Reading time:</strong> 9 minutes</p>
     </header>
     <article><nav class="toc" aria-label="Table of contents"><h2>Table of contents</h2><ol><li><a href="#overview">Why scripts fail</a></li><li><a href="#steps">Five-step debugging process</a></li><li><a href="#errors">Common Luau errors</a></li><li><a href="#faq">Frequently asked questions</a></li></ol></nav>
@@ -23,6 +23,14 @@
         <h2>Quick answer: How do you debug a Roblox Lua script?</h2>
         <p class="answer">Read the full message in the Output window, check the line number, confirm the object name and spelling, then change one thing and test again. Add short <code>print()</code> messages to find the last point where the script worked. Debugging is a repeatable process, not a guess.</p>
       </section>
+
+
+
+
+
+
+
+
 
 
 
@@ -44,6 +52,14 @@
 
 
 
+
+
+
+
+
+
+
+
       <section>
         <h2>Start with the Output window</h2>
         <p>The Output window is one of the most helpful tools in Roblox Studio. It displays errors, warnings, and any text you send with <code>print()</code>. When an error appears, do not read only the first line. Look for the script name, the line number, and the exact phrase that describes the problem.</p>
@@ -57,21 +73,13 @@
 
 
 
+
+
+
+
+
+
+
+
       <section>
         <h2 id="steps">A reliable five-step debugging routine</h2>
-        <h3>1. Reproduce the issue</h3>
-        <p>Start your test in the same way each time. If a button fails after a player joins, use Play mode and repeat those steps. A repeatable issue is much easier to solve than a random one.</p>
-        <h3>2. Isolate the smallest failing part</h3>
-        <p>Temporarily remove unrelated work from the test. If a long script controls a shop, score system, and menu, test the button event first. Once you know the event fires, test the next line. Small tests reduce confusion.</p>
-        <h3>3. Print useful values</h3>
-        <pre><code>local part = script.Parent
-
-
-
-
-
-
-
-
-print("Script started")
-print("Part name:", part.Name)
