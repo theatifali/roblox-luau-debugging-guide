@@ -8,9 +8,9 @@
   <meta name="robots" content="index,follow">
   <style>
     :root{--ink:#182235;--muted:#5b6880;--blue:#2563eb;--bg:#f6f8fc;--card:#fff;--line:#dce3ef}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.7 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}.wrap{max-width:900px;margin:auto;padding:34px 20px 70px}header{padding:40px 0 28px}small{font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--blue)}h1{font-size:clamp(2.2rem,5vw,3.9rem);line-height:1.08;margin:.35rem 0 1rem}h2{font-size:1.75rem;line-height:1.22;margin-top:2.5rem}h3{font-size:1.25rem;margin-top:1.8rem}p,li{max-width:74ch}.lead{font-size:1.2rem;color:var(--muted)}article{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:clamp(22px,5vw,46px);box-shadow:0 12px 30px rgba(24,34,53,.06)}a{color:#174fc4}code{padding:.12em .35em;background:#edf2fc;border-radius:5px}pre{background:#172033;color:#eff5ff;padding:18px;border-radius:10px;overflow:auto}.answer{background:#eff5ff;border-left:4px solid var(--blue);padding:18px 20px;border-radius:8px}table{border-collapse:collapse;width:100%;font-size:.94rem}th,td{border:1px solid var(--line);padding:10px;text-align:left}th{background:#f1f5fc}dt{font-weight:750;margin-top:1.4rem}dd{margin:.35rem 0 0}footer{color:var(--muted);font-size:.9rem;margin-top:25px}
-  </style>
+  header.site{background:#111827;color:#fff;padding:14px 0}header.site .nav{max-width:900px;margin:auto;padding:0 20px;display:flex;gap:18px;align-items:center;justify-content:space-between}header.site a{color:#dbeafe;text-decoration:none;font-size:.9rem}header.site nav{display:flex;gap:14px;flex-wrap:wrap}@media(max-width:620px){header.site .nav{display:block}header.site nav{margin-top:8px}}</style>
 </head>
-<body>
+<body><header class="site"><div class="nav"><strong>Luau Debugging Guide</strong><nav aria-label="Jump navigation"><a href="#overview">Overview</a><a href="#steps">Debugging steps</a><a href="#errors">Common errors</a><a href="#faq">FAQ</a></nav></div></header>
   <main class="wrap">
     <header>
       <small>Roblox Studio learning resource</small>
@@ -24,11 +24,13 @@
         <p class="answer">Read the full message in the Output window, check the line number, confirm the object name and spelling, then change one thing and test again. Add short <code>print()</code> messages to find the last point where the script worked. Debugging is a repeatable process, not a guess.</p>
       </section>
 
+
       <section>
-        <h2>Why Roblox scripts stop working</h2>
+        <h2 id="overview">Why Roblox scripts stop working</h2>
         <p>Most Luau problems come from a small number of causes: a misspelled name, a script placed in the wrong location, an event that never fires, a value with the wrong type, or code that runs before the object it needs is available. New creators sometimes see a red error and assume the whole project is broken. Usually, the error is a useful clue. Roblox Studio tells you which script reported the problem and often gives a line number that narrows the search immediately.</p>
         <p>The goal is to turn a vague question such as “Why does my script not work?” into a small, testable question. “Does this event run?” “Does this object exist?” “What value is stored here?” Each answer moves you closer to the fix.</p>
       </section>
+
 
       <section>
         <h2>Start with the Output window</h2>
@@ -36,8 +38,9 @@
         <p>For example, an “attempt to index nil” message usually means your script expected an object or value but received nothing. Check whether the object name is correct, whether it is in the right service, and whether it exists at the moment the code runs. An error about an unknown global may point to a misspelled variable or a missing <code>local</code> declaration.</p>
       </section>
 
+
       <section>
-        <h2>A reliable five-step debugging routine</h2>
+        <h2 id="steps">A reliable five-step debugging routine</h2>
         <h3>1. Reproduce the issue</h3>
         <p>Start your test in the same way each time. If a button fails after a player joins, use Play mode and repeat those steps. A repeatable issue is much easier to solve than a random one.</p>
         <h3>2. Isolate the smallest failing part</h3>
@@ -45,8 +48,10 @@
         <h3>3. Print useful values</h3>
         <pre><code>local part = script.Parent
 
+
 print("Script started")
 print("Part name:", part.Name)
+
 
 part.Touched:Connect(function(hit)
   print("Touched by:", hit.Name)
@@ -58,49 +63,5 @@ end)</code></pre>
         <p>After the error disappears, test the full feature again. A script can stop showing an error while still giving the wrong player a reward or showing the wrong text. Check the outcome, not only the absence of red text.</p>
       </section>
 
-      <section>
-        <h2>Common Luau errors and what to check</h2>
-        <table>
-          <thead><tr><th>Problem</th><th>What it often means</th><th>First check</th></tr></thead>
-          <tbody>
-            <tr><td>Unexpected symbol</td><td>A syntax mistake</td><td>Missing comma, quote, parenthesis, or <code>end</code></td></tr>
-            <tr><td>Attempt to index nil</td><td>An expected object or value is missing</td><td>Object path, spelling, and timing</td></tr>
-            <tr><td>Event does not react</td><td>The connection or script location is wrong</td><td>Add a <code>print()</code> inside the event</td></tr>
-            <tr><td>Value is wrong</td><td>The script received an unexpected type or state</td><td>Print the value and its type</td></tr>
-            <tr><td>Code runs only sometimes</td><td>A timing or replication issue</td><td>Test in Play mode and check where the script runs</td></tr>
-          </tbody>
-        </table>
-      </section>
 
       <section>
-        <h2>Know where scripts run</h2>
-        <p>Roblox experiences use server-side and client-side code. A Script normally runs on the server, while a LocalScript runs for a player’s client in supported locations. If a user-interface action is not working, check whether the LocalScript is located where Roblox can run it. If game-wide data is not updating, check whether server-side code owns that action.</p>
-        <p>You do not need to memorize every rule on day one. The important habit is to ask, “Who needs to see this result?” A personal interface message belongs to the player’s client. A shared game rule should usually be controlled by the server. As your projects grow, this question prevents many confusing bugs.</p>
-      </section>
-
-      <section>
-        <h2>Build debugging habits that save time</h2>
-        <p>Use clear names such as <code>RoundTimer</code>, <code>OpenShopButton</code>, and <code>PlayerCoins</code> instead of vague names such as <code>Thing</code> or <code>Script2</code>. Keep related code together, but split a very large script when it becomes difficult to scan. Add short comments that explain why a decision was made. Comments should help a future reader understand intent, not repeat obvious code.</p>
-        <p>Make a copy of a place before a large change. Keep a short note about the bugs you fix and the cause of each one. Over time, this becomes your personal troubleshooting guide. You will notice repeat patterns, such as using the wrong object path or forgetting to test a condition’s false case.</p>
-      </section>
-
-      <section>
-        <h2>Learn safely and use trusted references</h2>
-        <p>Test only in experiences you own or where you have clear permission to make changes. Respect platform rules and other creators’ work. The most dependable source for Studio, Luau, and Roblox APIs is the <a href="https://create.roblox.com/docs">Roblox Creator Documentation</a>. Use official documentation to confirm how an object, event, or service is intended to work.</p>
-        <p>For an additional beginner-friendly learning roadmap, see <a href="https://theatifali.github.io/roblox-lua-learning-roadmap/">Roblox Lua Scripting for Beginners</a>. For a broader overview of mobile-focused Roblox resources, visit the <a href="https://deltaexecuter.app/">Delta Executer project</a>.</p>
-      </section>
-
-      <section>
-        <h2>Frequently asked questions</h2>
-        <dl>
-          <dt>What is the fastest way to fix a Roblox Lua error?</dt><dd>Read the Output message, go to the reported line, and test one small correction. Do not change unrelated code until you know what the message means.</dd>
-          <dt>Why is my <code>print()</code> message not showing?</dt><dd>Check that the script is in a location where it can run, that you are using the correct test mode, and that the code reaches the print statement.</dd>
-          <dt>Should beginners use long scripts from the internet?</dt><dd>Examples can help, but read each line and test it in a project you control. Understanding a small script is more valuable than pasting a large unknown one.</dd>
-          <dt>How do I become better at debugging?</dt><dd>Practice often, keep changes small, and write down what caused each error. Debugging improves through repetition and careful observation.</dd>
-        </dl>
-      </section>
-    </article>
-    <footer>Educational content for beginner Roblox Studio and Luau learners.</footer>
-  </main>
-</body>
-</html>
