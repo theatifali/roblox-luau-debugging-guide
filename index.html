@@ -7,7 +7,7 @@
   <meta name="description" content="A practical beginner guide to debugging Roblox Lua (Luau) scripts in Roblox Studio. Learn how to read Output errors, test events, and fix common mistakes.">
   <meta name="robots" content="index,follow">
   <style>
-    :root{--ink:#182235;--muted:#5b6880;--blue:#2563eb;--bg:#f6f8fc;--card:#fff;--line:#dce3ef}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.7 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}.wrap{max-width:900px;margin:auto;padding:34px 20px 70px}header{padding:40px 0 28px}small{font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--blue)}h1{font-size:clamp(2.2rem,5vw,3.9rem);line-height:1.08;margin:.35rem 0 1rem}h2{font-size:1.75rem;line-height:1.22;margin-top:2.5rem}h3{font-size:1.25rem;margin-top:1.8rem}p,li{max-width:74ch}.lead{font-size:1.2rem;color:var(--muted)}article{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:clamp(22px,5vw,46px);box-shadow:0 12px 30px rgba(24,34,53,.06)}a{color:#174fc4}code{padding:.12em .35em;background:#edf2fc;border-radius:5px}pre{background:#172033;color:#eff5ff;padding:18px;border-radius:10px;overflow:auto}.answer{background:#eff5ff;border-left:4px solid var(--blue);padding:18px 20px;border-radius:8px}table{border-collapse:collapse;width:100%;font-size:.94rem}th,td{border:1px solid var(--line);padding:10px;text-align:left}th{background:#f1f5fc}dt{font-weight:750;margin-top:1.4rem}dd{margin:.35rem 0 0}footer{color:var(--muted);font-size:.9rem;margin-top:25px}
+    :root{--ink:#182235;--muted:#5b6880;--blue:#2563eb;--bg:#f6f8fc;--card:#fff;--line:#dce3ef}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.7 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}.wrap{max-width:900px;margin:auto;padding:34px 20px 70px}header{padding:40px 0 28px}small{font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--blue)}h1{font-size:clamp(2.2rem,5vw,3.9rem);line-height:1.08;margin:.35rem 0 1rem}h2{font-size:1.75rem;line-height:1.22;margin-top:2.5rem}h3{font-size:1.25rem;margin-top:1.8rem}p,li{max-width:74ch}.lead{font-size:1.2rem;color:var(--muted)}article{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:clamp(22px,5vw,46px);box-shadow:0 12px 30px rgba(24,34,53,.06)}a{color:#174fc4}code{padding:.12em .35em;background:#edf2fc;border-radius:5px}pre{background:#172033;color:#ffffff;padding:18px;border-radius:10px;overflow:auto}.answer{background:#eff5ff;border-left:4px solid var(--blue);padding:18px 20px;border-radius:8px}table{border-collapse:collapse;width:100%;font-size:.94rem}th,td{border:1px solid var(--line);padding:10px;text-align:left}th{background:#f1f5fc}dt{font-weight:750;margin-top:1.4rem}dd{margin:.35rem 0 0}footer{color:var(--muted);font-size:.9rem;margin-top:25px}
   header.site{background:#111827;color:#fff;padding:14px 0}header.site .nav{max-width:900px;margin:auto;padding:0 20px;display:flex;gap:18px;align-items:center;justify-content:space-between}header.site a{color:#dbeafe;text-decoration:none;font-size:.9rem}header.site nav{display:flex;gap:14px;flex-wrap:wrap}@media(max-width:620px){header.site .nav{display:block}header.site nav{margin-top:8px}}</style>
 </head>
 <body><header class="site"><div class="nav"><strong>Luau Debugging Guide</strong><nav aria-label="Jump navigation"><a href="#overview">Overview</a><a href="#steps">Debugging steps</a><a href="#errors">Common errors</a><a href="#faq">FAQ</a></nav></div></header>
@@ -18,11 +18,13 @@
       <p class="lead">A practical way to find script problems, understand Roblox Studio Output messages, and build better Luau habits one test at a time.</p>
       <p><strong>Updated:</strong> August 2026 · <strong>Reading time:</strong> 9 minutes</p>
     </header>
-    <article>
+    <article><nav class="toc" aria-label="Table of contents"><h2>Table of contents</h2><ol><li><a href="#overview">Why scripts fail</a></li><li><a href="#steps">Five-step debugging process</a></li><li><a href="#errors">Common Luau errors</a></li><li><a href="#faq">Frequently asked questions</a></li></ol></nav>
       <section>
         <h2>Quick answer: How do you debug a Roblox Lua script?</h2>
         <p class="answer">Read the full message in the Output window, check the line number, confirm the object name and spelling, then change one thing and test again. Add short <code>print()</code> messages to find the last point where the script worked. Debugging is a repeatable process, not a guess.</p>
       </section>
+
+
 
 
       <section>
@@ -32,11 +34,15 @@
       </section>
 
 
+
+
       <section>
         <h2>Start with the Output window</h2>
         <p>The Output window is one of the most helpful tools in Roblox Studio. It displays errors, warnings, and any text you send with <code>print()</code>. When an error appears, do not read only the first line. Look for the script name, the line number, and the exact phrase that describes the problem.</p>
         <p>For example, an “attempt to index nil” message usually means your script expected an object or value but received nothing. Check whether the object name is correct, whether it is in the right service, and whether it exists at the moment the code runs. An error about an unknown global may point to a misspelled variable or a missing <code>local</code> declaration.</p>
       </section>
+
+
 
 
       <section>
@@ -49,8 +55,12 @@
         <pre><code>local part = script.Parent
 
 
+
+
 print("Script started")
 print("Part name:", part.Name)
+
+
 
 
 part.Touched:Connect(function(hit)
@@ -59,9 +69,3 @@ end)</code></pre>
         <p>These messages tell you whether the script started, whether it found the intended part, and whether the event happened. Remove temporary messages when the feature is stable, or keep only the ones that are useful for future maintenance.</p>
         <h3>4. Change one thing</h3>
         <p>Do not rename objects, move scripts, and rewrite conditions all at once. A single change makes the result meaningful. If the error changes, you have learned something. If it disappears, you know what fixed it.</p>
-        <h3>5. Test the final behavior</h3>
-        <p>After the error disappears, test the full feature again. A script can stop showing an error while still giving the wrong player a reward or showing the wrong text. Check the outcome, not only the absence of red text.</p>
-      </section>
-
-
-      <section>
